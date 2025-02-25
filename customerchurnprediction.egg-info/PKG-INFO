@@ -1,0 +1,13 @@
+Metadata-Version: 2.2
+Name: customerchurnprediction
+Version: 0.0.1
+Author: rahul
+Author-email: datumyasciotech@gmail.com
+Requires-Dist: imblearn
+Requires-Dist: xgboost
+Requires-Dist: pandas
+Requires-Dist: scikit-learn
+Requires-Dist: setuptools
+Dynamic: author
+Dynamic: author-email
+Dynamic: requires-dist

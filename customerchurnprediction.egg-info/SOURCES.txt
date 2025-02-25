@@ -1,0 +1,16 @@
+setup.py
+customerchurnprediction.egg-info/PKG-INFO
+customerchurnprediction.egg-info/SOURCES.txt
+customerchurnprediction.egg-info/dependency_links.txt
+customerchurnprediction.egg-info/requires.txt
+customerchurnprediction.egg-info/top_level.txt
+src/__init__.py
+src/exception.py
+src/logger.py
+src/components/__init__.py
+src/components/data_ingestion.py
+src/components/data_transformation.py
+src/components/model_trainer.py
+src/pipeline/__init__.py
+src/pipeline/predict_pipeline.py
+src/pipeline/train_pipeline.py
