@@ -57,16 +57,15 @@ class ModelTrainer:
 
             if best_model_score<0.6:
                 raise customException("no best model found")
-            logging.log("the best model is found on both training and testing data")
+            logging.info("the best model is found on both training and testing data")
 
             save_object(self.model_trainer_config.trained_model_file_path,best_model)
 
             predicted=best_model.predict(X_test)
-
-            accuracy=accuracy_score(X_test,predicted)
+            print(predicted)
+            accuracy=accuracy_score(y_test,predicted)
 
             return accuracy
         
         except Exception as e :
             raise customException(e,sys)
-                   

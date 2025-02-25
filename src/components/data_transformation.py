@@ -69,13 +69,19 @@ class DataTransformation:
             target_feature="Churn"
 
             input_feature_train_df=train_df.drop(columns=[target_feature],axis=1)
-            target_feature_train_df=train_df[target_feature]
+            target_feature_train_df=train_df[target_feature].replace({'Yes':1,'No':0}).astype(int)
 
             input_feature_test_df=test_df.drop(columns=[target_feature],axis=1)
-            target_feature_test_df=test_df[target_feature]
+            target_feature_test_df=test_df[target_feature].replace({'Yes':1,'No':0}).astype(int)
 
-            train_arr=np.c_[input_feature_train_df,np.array(target_feature_train_df)]
-            test_arr=np.c_[input_feature_test_df,np.array(target_feature_test_df)]
+
+            input_feature_train_arr=preprocessor_obj.fit_transform(input_feature_train_df)
+            input_feature_test_arr=preprocessor_obj.transform(input_feature_test_df)
+
+
+
+            train_arr=np.c_[input_feature_train_arr,np.array(target_feature_train_df)]
+            test_arr=np.c_[input_feature_test_arr,np.array(target_feature_test_df)]
 
             save_object(
                 self.data_transformation_config.preprocessor_obj_file_path,
