@@ -2,6 +2,8 @@ Recurring-Customer-Churn-Prediction-for-Subscription-Business-Model(1).pptx
 roadmap for major project.xmind
 venv/
 logs/
+venv
+/venv
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
