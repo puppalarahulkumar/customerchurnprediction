@@ -45,7 +45,40 @@ class ModelTrainer:
                 "LogisticRegression":LogisticRegression()
             }
 
-            models_report:dict=evaluate_models(x_train=X_train,x_test=X_test,y_train=y_train,y_test=y_test,models=models)
+            params = {
+                    "Decision Tree Classifier": {
+                        "criterion": ["gini", "entropy"],
+                        "max_depth": [None, 10, 20, 30],
+                        "min_samples_split": [2, 5, 10],
+                        "min_samples_leaf": [1, 2, 4]
+                    },
+                    "Random Forest Classifier": {
+                        "n_estimators": [50, 100, 200],
+                        "criterion": ["gini", "entropy"],
+                        "max_depth": [None, 10, 20, 30],
+                        "min_samples_split": [2, 5, 10],
+                        "min_samples_leaf": [1, 2, 4]
+                    },
+                    "KNeighborsClassifier": {
+                        "n_neighbors": [3, 5, 7, 9],
+                        "weights": ["uniform", "distance"],
+                        "metric": ["euclidean", "manhattan", "minkowski"]
+                    },
+                    "SVC": {
+                        "C": [0.1, 1, 10, 100],
+                        "kernel": ["linear", "rbf", "poly", "sigmoid"],
+                        "gamma": ["scale", "auto"]
+                    },
+                    "LogisticRegression": {
+                        "penalty": ["l1", "l2", "elasticnet", None],
+                        "C": [0.1, 1, 10, 100],
+                        "solver": ["lbfgs", "liblinear", "saga"],
+                        "max_iter": [100, 200, 300]
+                    }
+                }
+
+
+            models_report:dict=evaluate_models(x_train=X_train,x_test=X_test,y_train=y_train,y_test=y_test,models=models,params=params)
 
             best_model_score=max(models_report.values())
 
