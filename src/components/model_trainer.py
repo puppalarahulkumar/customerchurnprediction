@@ -95,6 +95,7 @@ class ModelTrainer:
             save_object(self.model_trainer_config.trained_model_file_path,best_model)
 
             predicted=best_model.predict(X_test)
+            print(best_model_name)
             print(predicted)
             accuracy=accuracy_score(y_test,predicted)
 

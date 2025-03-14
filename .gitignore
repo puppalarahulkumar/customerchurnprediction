@@ -4,6 +4,7 @@ venv/
 logs/
 venv
 /venv
+artifacts/
 /customerchurnprediction.egg-info
 customerchurnprediction.egg-info/
 customerchurnprediction.egg-info
