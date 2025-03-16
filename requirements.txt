@@ -4,4 +4,7 @@ pandas
 scikit-learn
 setuptools
 dill
+tensorflow
+keras
+numpy
 #-e .
