@@ -7,4 +7,5 @@ dill
 tensorflow
 keras
 numpy
+flask
 #-e .
