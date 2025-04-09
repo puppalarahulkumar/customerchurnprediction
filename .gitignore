@@ -6,6 +6,7 @@ venv
 /venv
 artifacts/
 /artifacts
+flowchart of majorproject.png
 /customerchurnprediction.egg-info
 customerchurnprediction.egg-info/
 customerchurnprediction.egg-info

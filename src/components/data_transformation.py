@@ -8,10 +8,16 @@ from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler,OneHotEncoder
-
+from sklearn.preprocessing import OrdinalEncoder
 from src.exception import customException
 from src.logger import logging
 from src.utils import save_object
+
+
+# sample oversampling
+from imblearn.over_sampling import RandomOverSampler
+
+
 
 @dataclass
 class DataTransfomationConfig:
@@ -74,14 +80,21 @@ class DataTransformation:
             input_feature_test_df=test_df.drop(columns=[target_feature],axis=1)
             target_feature_test_df=test_df[target_feature].replace({'Yes':1,'No':0}).astype(int)
 
+            ros=RandomOverSampler()
+            input_feature_train_df,target_feature_train_df=ros.fit_resample(input_feature_train_df,target_feature_train_df)
+            input_feature_test_df,target_feature_test_df=ros.fit_resample(input_feature_test_df,target_feature_test_df)
 
             input_feature_train_arr=preprocessor_obj.fit_transform(input_feature_train_df)
             input_feature_test_arr=preprocessor_obj.transform(input_feature_test_df)
 
 
-
             train_arr=np.c_[input_feature_train_arr,np.array(target_feature_train_df)]
             test_arr=np.c_[input_feature_test_arr,np.array(target_feature_test_df)]
+            
+            # new_train_arr=pd.DataFrame(train_arr)
+            # new_test_arr=pd.DataFrame(test_arr)
+            # new_train_arr.to_csv("trained_arr.csv")
+            # new_test_arr.to_csv("tested_arr.csv")
 
             save_object(
                 self.data_transformation_config.preprocessor_obj_file_path,

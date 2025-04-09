@@ -12,6 +12,7 @@ from sklearn.linear_model import LogisticRegression
 # performance metrics
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import confusion_matrix
+from sklearn.metrics import f1_score, recall_score, roc_auc_score
 
 from src.utils import save_object
 from src.logger import logging
@@ -38,43 +39,28 @@ class ModelTrainer:
             )
 
             models={
-                "Decision Tree Classifier":DecisionTreeClassifier(),
-                "Random Forest Classifier":RandomForestClassifier(),
-                "KNeighborsClassifier":KNeighborsClassifier(),
-                "SVC":SVC(),
-                "LogisticRegression":LogisticRegression()
+            "KNeighborsClassifier":KNeighborsClassifier(),
+            "SVC":SVC(),
+            "LogisticRegression":LogisticRegression()
             }
 
             params = {
-                    "Decision Tree Classifier": {
-                        "criterion": ["gini", "entropy"],
-                        "max_depth": [None, 10, 20, 30],
-                        "min_samples_split": [2, 5, 10],
-                        "min_samples_leaf": [1, 2, 4]
-                    },
-                    "Random Forest Classifier": {
-                        "n_estimators": [50, 100, 200],
-                        "criterion": ["gini", "entropy"],
-                        "max_depth": [None, 10, 20, 30],
-                        "min_samples_split": [2, 5, 10],
-                        "min_samples_leaf": [1, 2, 4]
-                    },
-                    "KNeighborsClassifier": {
-                        "n_neighbors": [3, 5, 7, 9],
-                        "weights": ["uniform", "distance"],
-                        "metric": ["euclidean", "manhattan", "minkowski"]
-                    },
-                    "SVC": {
-                        "C": [0.1, 1, 10, 100],
-                        "kernel": ["linear", "rbf", "poly", "sigmoid"],
-                        "gamma": ["scale", "auto"]
-                    },
-                    "LogisticRegression": {
-                        "penalty": ["l1", "l2", "elasticnet", None],
-                        "C": [0.1, 1, 10, 100],
-                        "solver": ["lbfgs", "liblinear", "saga"],
-                        "max_iter": [100, 200, 300]
-                    }
+                "KNeighborsClassifier": {
+                "n_neighbors": [3, 5, 7, 9],
+                "weights": ["uniform", "distance"],
+                "metric": ["euclidean", "manhattan", "minkowski"]
+                },
+                "SVC": {
+                "C": [0.1, 1, 10, 100],
+                "kernel": ["linear", "rbf", "poly", "sigmoid"],
+                "gamma": ["scale", "auto"]
+                },
+                "LogisticRegression": {
+                "penalty": [ "l2", "elasticnet"],
+                "C": [0.1, 1, 10, 100],
+                "solver": ["lbfgs", "saga"],
+                "max_iter": [100, 200, 300]
+                }
                 }
 
 
@@ -89,6 +75,7 @@ class ModelTrainer:
             best_model=models[best_model_name]
 
             if best_model_score<0.6:
+                print("no best model found")
                 raise customException("no best model found")
             logging.info("the best model is found on both training and testing data")
 
